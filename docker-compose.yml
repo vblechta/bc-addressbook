@@ -1,0 +1,19 @@
+services:
+    abk:
+      container_name: bc-adressbook
+      build: '.'
+      restart: unless-stopped
+      ports:
+        # - '${ABK_PORT:-5000}:${ABK_PORT:-5000}'
+        - '${ABK_PORT:-5000}:5000'
+      volumes:
+        - ./abk:/abk
+      environment:
+        ABK_HOSTNAME: ${ABK_HOSTNAME}
+        # ABK_PORT: ${ABK_PORT}
+        ABK_SSL: ${ABK_SSL}
+        BC_PHONEBOOKS: ${BC_PHONEBOOKS}
+        ABK_ADMIN_USER: ${ABK_ADMIN_USER}
+        ABK_ADMIN_PASSWORD: ${ABK_ADMIN_PASSWORD}
+        ABK_SECRET_KEY: ${ABK_SECRET_KEY}
+        ABK_VERIFY_PHONEBOOK_SSL: ${ABK_VERIFY_PHONEBOOK_SSL:-true}

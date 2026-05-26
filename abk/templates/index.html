@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telefonní seznam</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+* {
+    transition: all 0.3s ease;
+}
+
+body {
+    background: #f8f9fa;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #1a1a1a;
+}
+
+.navbar {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-right: 2rem;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #6b7280 !important;
+    margin-left: 2rem;
+    position: relative;
+    padding-bottom: 0.5rem !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #3b82f6 !important;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.container-main {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 40px;
+    margin-top: 30px;
+}
+
+h1 {
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead {
+    background: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.table thead th {
+    border-top: none;
+    color: #374151;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0 !important;
+}
+
+.table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background-color: #f9fafb;
+    transform: translateX(2px);
+}
+
+.note {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.search-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.search-box input {
+    padding: 14px 20px;
+    padding-left: 45px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #f9fafb;
+    font-weight: 500;
+}
+
+.search-box input::placeholder {
+    color: #9ca3af;
+}
+
+.search-box input:focus {
+    border-color: #3b82f6;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d1d5db;
+    pointer-events: none;
+}
+
+.table-responsive {
+    border-radius: 12px;
+}
+
+.alert {
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.alert-danger {
+    background-color: #fef2f2;
+    color: #991b1b;
+}
+
+.btn-close {
+    filter: invert(1);
+}
+    
+    @media (max-width: 991.98px) {
+        .container-main {
+            padding: 28px 20px;
+        }
+
+        .search-box input {
+            padding: 13px 18px;
+        }
+
+        .table thead th,
+        .table tbody td {
+            padding: 0.85rem;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        body {
+            padding: 0;
+        }
+
+        .navbar {
+            padding: 0.75rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.18rem;
+        }
+
+        .navbar-collapse {
+            background: white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            margin-top: 0.75rem;
+            border-radius: 14px;
+        }
+
+        .nav-link {
+            padding: 0.75rem 1rem !important;
+        }
+
+        .container-main {
+            padding: 24px 18px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            padding-left: 45px;
+        }
+
+        .table thead th {
+            font-size: 0.78rem;
+        }
+
+        .table tbody td {
+            padding: 0.75rem;
+        }
+
+        .table tbody tr:hover {
+            transform: none;
+        }
+
+        .container-lg {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-lg">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-phone me-2"></i>Kontaktní seznam
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border: none;">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="ms-auto">
+                <a class="nav-link" href="/admin"><i class="fas fa-cog me-2"></i>Administrace</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% if announcement and announcement.enabled %}
+<div class="container-lg mt-3">
+    <div class="alert alert-{{ announcement.type or 'info' }} alert-dismissible fade show" role="alert">
+        {{ announcement.text | safe }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+</div>
+{% endif %}
+
+<div class="container-lg">
+    <div class="container-main">
+        <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" title="Vyhledávací pole" class="form-control form-control-lg" placeholder="Hledat po jménu, telefonu nebo poznámce...">
+        </div>
+
+        {% if errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            {% for error in errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endif %}
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Jméno</th>
+                        <th style="width: 20%;">Telefon</th>
+                        <th style="width: 50%;">Poznámka</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    {% for item in entries %}
+                    <tr style="border-left: 4px solid {{ item.color or '#e5e7eb' }}">
+                        <td title="Jméno kontaktu" class="fw-600">{{ item.name }}</td>
+                        <td><code title="Telefonní číslo" style="background: #f3f4f6; padding: 0.3rem 0.6rem; border-radius: 4px;">{{ item.phone }}</code></td>
+                        <td title="Poznámka" class="note">{{ item.note }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const searchInput = document.getElementById('searchInput');
+const tableBody = document.getElementById('tableBody');
+
+async function updateTable() {
+    const query = searchInput.value.trim();
+    const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+    const entries = await response.json();
+    
+    tableBody.innerHTML = entries.map(item => `
+        <tr style="border-left: 4px solid ${item.color || '#e5e7eb'}">
+            <td class="fw-600">${item.name}</td>
+            <td><code style="background: #f3f4f6; padding: 0.3rem 0.6rem; border-radius: 4px;">${item.phone}</code></td>
+            <td class="note">${item.note}</td>
+        </tr>
+    `).join('');
+}
+
+searchInput.addEventListener('input', updateTable);
+</script>
+
+</body>
+</html>
+
